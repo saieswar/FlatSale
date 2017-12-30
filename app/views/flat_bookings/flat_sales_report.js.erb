@@ -1,0 +1,5 @@
+<% if @sales_reports.present? %>
+  $("#sale_report").html("<%= j render 'sale_report'%>")
+<% else %>
+  $("#sale_report").html("<h4 class='alert alert-danger'>No Sales Found</h4>");
+<% end %>

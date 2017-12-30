@@ -1,0 +1,21 @@
+<!-- partial loading for reports -->
+<center>
+<div class="container" >
+<table class="table table-dark table-hover" style="border: 10px; width: 400px">
+  <tr>
+	  <th> Period </th>
+	  <th> Value </th>
+  </tr>
+  <tbody>
+    <% @sales_reports.each do|type, value| %>
+      <tr> 
+         <% m_or_y = type.send(@type.downcase) %>
+        <td><%= m_or_y <= 12 ? Date::MONTHNAMES[m_or_y] : m_or_y %></td>
+        <td><%= value %></td> 
+      </tr>
+      <% end %>
+  </tbody>
+
+</table>
+</div>
+</center>

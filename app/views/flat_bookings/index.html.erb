@@ -1,0 +1,88 @@
+<div class="container">
+ <div>
+  <center><h1>FlatBooking Sales Report</h1></center>
+  </div>
+  </br>
+  <div id="error_explanation" class="alert alert-danger">
+    <div id="error"></div>
+  </div>
+
+
+  <!-- form to generate reports -->
+
+  <%= form_tag(flat_bookings_flat_sales_report_path, method: :get, remote: true) do %>
+
+
+    <!-- start date field -->
+    <div class="row">
+      <div class="col-sm-4">
+      </div>
+      <div class="col-sm-4">
+        <div class="form-group"> 
+          <%= label_tag 'Start Date:' %>    
+          <%= date_field_tag(:start_date, Date.today, class: "form-control")%>
+        </div>
+      </div>
+    </div>
+    
+    <!-- end date field -->
+    <div class="row">
+      <div class="col-sm-4">
+      </div>
+      <div class="col-sm-4">      
+        <div class="form-group">     
+          <%= label_tag 'End Date:' %>           
+          <%= date_field_tag(:end_date, Date.today, class: "form-control")%>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Type of report -->
+    <div class="row">
+      <div class="col-sm-4">
+      </div>
+      <div class="col-sm-4">
+        <div class="form-group">
+         <%= label_tag 'Type of Report'%>     
+          <%= select_tag :type, options_for_select(FlatBooking::REPORTTYPES), class: "form-control"  %>
+        </div>
+      </div>
+    </div>
+   
+    <div class="row">
+      <div class="col-sm-4">
+      </div>
+      <div class="col-sm-4">
+        <div class="form-group">     
+         <%= submit_tag("Get Report", id: "report", class: "btn btn-info btn-md") %>
+        </div>
+      </div>
+    </div>
+
+  <% end %>
+  <!-- rendering report in sale_report id -->
+  <div id="sale_report"></div>
+
+</div>
+
+<script type="text/javascript">
+	$("#error_explanation").hide();
+	$("#report").on('click', function() {
+    $("#error_explanation").hide();
+    var start_date = $('#start_date').val()
+    var end_date = $("#end_date").val()
+    var eDate = new Date(end_date);
+    var sDate = new Date(start_date);
+  if(sDate > eDate)
+    {
+     $("#error_explanation").show();
+     $("#sale_report").hide();
+    $("#error").text("Please ensure that the End Date is greater than or equal to the Start Date.");
+    return false;
+    }
+    else{
+      $("#sale_report").show();
+    }
+
+});
+</script>
