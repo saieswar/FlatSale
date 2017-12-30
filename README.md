@@ -22,3 +22,11 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+After creation and migration of database
+
+Run rake db:seed
+
+
+
+
